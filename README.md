@@ -1,4 +1,4 @@
-<div aling="center"><img src="https://romanin-rf.github.io/romanin-rf/data/loading.gif" alt="LOADING"></div>
+<img aling="center" src="https://romanin-rf.github.io/romanin-rf/data/loading.gif" alt="LOADING">
 <!--
 **romanin-rf/romanin-rf** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
