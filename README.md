@@ -22,5 +22,6 @@
 
 ### 📈 Stats:
 <div id="header" align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=romanin-rf&theme=dark)" title="Langs Stats" alt="Langs Stats"/>&nbsp;
+  <img src="https://github-readme-stats.vercel.app/api?username=b8ff&count_private=true&show_icons=true&theme=dark" height=250/>&nbsp;
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=romanin-rf&theme=dark" height=250/>
 </div>
