@@ -1,5 +1,5 @@
 <div id="header" align="center">
-  <img src="https://romanin-rf.github.io/romanin-rf/data/loading.gif" alt="LOADING" width="100">
+  <img src="https://media.tenor.com/U4PVgG0Uh1wAAAAi/senko-fox.gif" alt="Avatar" width="200">
 </div>
 
 ---
@@ -17,6 +17,9 @@
   <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="60" height="60"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-plain-wordmark.svg"  title="CSS3" alt="CSS" width="60" height="60"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="60" height="60"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" title="Windows" alt="Windows" width="60" height="60"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" title="Ubuntu" alt="Ubuntu" width="60" height="60"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-plain.svg" title="Android" alt="Android" width="60" height="60"/>
 </div>
 
 ---
