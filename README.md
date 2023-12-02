@@ -11,7 +11,6 @@
 </div>
 
 ---
-
 ### Languages and Tools:
 <div id="header" align="center">
   <img src="https://github.com/devicons/devicon/blob/master/icons/python/python-original.svg" title="Python" alt="Python" width="60" height="60"/>&nbsp;
@@ -34,7 +33,7 @@
 
 ---
 
-### 📈 Stats:
+### Stats:
 <div id="header" align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=romanin-rf&count_private=true&show_icons=true&theme=dark" height="210"/>&nbsp;
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=romanin-rf&theme=dark" height="210"/>
