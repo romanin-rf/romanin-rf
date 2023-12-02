@@ -1,5 +1,11 @@
 <div id="header" align="center">
-  <img src="https://media.tenor.com/U4PVgG0Uh1wAAAAi/senko-fox.gif" alt="Avatar" width="200">
+  <svg fill="none" viewBox="0 0 400 400" width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+    <foreignObject width="100%" height="100%">
+      <div class="snow" xmlns="http://www.w3.org/1999/xhtml">
+        <img src="https://media.tenor.com/U4PVgG0Uh1wAAAAi/senko-fox.gif" alt="Avatar" width="200">
+      </div>
+    </foreignObject>
+  </svg>
 </div>
 
 ---
