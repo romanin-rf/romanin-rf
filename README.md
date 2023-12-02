@@ -1,11 +1,13 @@
 <div id="header" align="center">
   <svg fill="none" viewBox="0 0 400 400" width="400" height="400" xmlns="http://www.w3.org/2000/svg">
     <foreignObject width="100%" height="100%">
+      <link href="https://raw.githubusercontent.com/romanin-rf/romanin-rf/main/github.css" rel="stylesheet">
       <div class="snow" xmlns="http://www.w3.org/1999/xhtml">
-        <img src="https://media.tenor.com/U4PVgG0Uh1wAAAAi/senko-fox.gif" alt="Avatar" width="200">
+        <div></div>
       </div>
     </foreignObject>
   </svg>
+  <img src="https://media.tenor.com/U4PVgG0Uh1wAAAAi/senko-fox.gif" alt="Avatar" width="200">
 </div>
 
 ---
