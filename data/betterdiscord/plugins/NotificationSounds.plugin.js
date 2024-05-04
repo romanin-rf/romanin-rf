@@ -2,7 +2,7 @@
  * @name NotificationSounds
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 3.8.8
+ * @version 3.9.6
  * @description Allows you to replace the native Sounds with custom Sounds
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -25,9 +25,14 @@ module.exports = (_ => {
 		getDescription () {return `The Library Plugin needed for ${this.name} is missing. Open the Plugin Settings to download it. \n\n${this.description}`;}
 		
 		downloadLibrary () {
-			require("request").get("https://mwittrien.github.io/BetterDiscordAddons/Library/0BDFDB.plugin.js", (e, r, b) => {
-				if (!e && b && r.statusCode == 200) require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "0BDFDB.plugin.js"), b, _ => BdApi.showToast("Finished downloading BDFDB Library", {type: "success"}));
-				else BdApi.alert("Error", "Could not download BDFDB Library Plugin. Try again later or download it manually from GitHub: https://mwittrien.github.io/downloader/?library");
+			BdApi.Net.fetch("https://mwittrien.github.io/BetterDiscordAddons/Library/0BDFDB.plugin.js").then(r => {
+				if (!r || r.status != 200) throw new Error();
+				else return r.text();
+			}).then(b => {
+				if (!b) throw new Error();
+				else return require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "0BDFDB.plugin.js"), b, _ => BdApi.showToast("Finished downloading BDFDB Library", {type: "success"}));
+			}).catch(error => {
+				BdApi.alert("Error", "Could not download BDFDB Library Plugin. Try again later or download it manually from GitHub: https://mwittrien.github.io/downloader/?library");
 			});
 		}
 		
@@ -67,13 +72,13 @@ module.exports = (_ => {
 		let types = {};
 		
 		const message1Types = {
-			dm:			{src: "./message3.mp3", name: "Message (Direct Message)", force: null, focus: true},
-			groupdm:	{src: "./message3.mp3", name: "Message (Group Message)", force: null, focus: true},
-			mentioned:	{src: "./message2.mp3", name: "Message Mentioned", force: false, focus: true},
-			reply:		{src: "./message2.mp3", name: "Message Mentioned (reply)", force: false, focus: true},
-			role:		{src: "./mention1.mp3", name: "Message Mentioned (role)", force: false, focus: true},
-			everyone:	{src: "./mention2.mp3", name: "Message Mentioned (@everyone)", force: false, focus: true},
-			here:		{src: "./mention3.mp3", name: "Message Mentioned (@here)", force: false, focus: true}
+			dm:		{src: "./message3.mp3", name: "Message (Direct Message)"},
+			groupdm:	{src: "./message3.mp3", name: "Message (Group Message)"},
+			mentioned:	{src: "./message2.mp3", name: "Message Mentioned"},
+			reply:		{src: "./message2.mp3", name: "Message Mentioned (reply)"},
+			role:		{src: "./mention1.mp3", name: "Message Mentioned (role)"},
+			everyone:	{src: "./mention2.mp3", name: "Message Mentioned (@everyone)"},
+			here:		{src: "./mention3.mp3", name: "Message Mentioned (@here)"}
 		};
 		
 		const namePrefixes = {
@@ -83,6 +88,7 @@ module.exports = (_ => {
 		};
 		
 		const nameSynonymes = {
+			"message3":	"Message (Current Channel)",
 			"reconnect":	"Invited To Speak"
 		};
 		
@@ -172,7 +178,7 @@ module.exports = (_ => {
 				
 				this.defaults = {
 					volumes: {
-						globalVolume:				{value: 100,				description: "Global Notification Sounds Volume"}
+						globalVolume:		{value: 100,	description: "Global Notification Sounds Volume"}
 					}
 				};
 				
@@ -199,22 +205,18 @@ module.exports = (_ => {
 							src: src,
 							mute: id.startsWith("call_") ? null : false,
 							streamMute: false,
-							invisibleMute: false,
-							force: id == "message1" ? false : null,
-							focus: id == "message1" ? true : false
+							invisibleMute: false
 						};
-						if (id == "message1") {
+						if (id == "message1" || id == "message3") {
 							types[id].mute = true;
 							types[id].streamMute = false;
 							types[id].invisibleMute = false;
-							for (let subType in message1Types) types[subType] = {
+							if (id == "message1") for (let subType in message1Types) types[subType] = {
 								name: message1Types[subType].name,
 								src: BDFDB.LibraryModules.SoundParser(message1Types[subType].src),
 								mute: true,
 								streamMute: false,
-								invisibleMute: false,
-								force: message1Types[subType].force,
-								focus: message1Types[subType].focus
+								invisibleMute: false
 							}
 						}
 					}
@@ -249,52 +251,61 @@ module.exports = (_ => {
 						const guildId = message.guild_id || null;
 						if (message.author.id != BDFDB.UserUtils.me.id && !BDFDB.LibraryStores.RelationshipStore.isBlocked(message.author.id)) {
 							const channel = BDFDB.LibraryStores.ChannelStore.getChannel(message.channel_id);
+							
+							const isCurrent = BDFDB.LibraryStores.SelectedChannelStore.getChannelId() == channel.id;
 							const isGroupDM = channel.isGroupDM();
-							const muted = BDFDB.ChannelUtils.isThread(channel) ? BDFDB.LibraryStores.JoinedThreadsStore.isMuted(channel.id) : BDFDB.LibraryStores.UserGuildSettingsStore.isGuildOrCategoryOrChannelMuted(guildId, channel.id);
-							const focused = document.hasFocus() && BDFDB.LibraryStores.SelectedChannelStore.getChannelId() == channel.id;
-							if (!guildId && !muted && !(choices[isGroupDM ? "groupdm" : "dm"].focus && focused)) {
+							const isThread = BDFDB.ChannelUtils.isThread(channel);
+							
+							if (isThread && BDFDB.LibraryStores.JoinedThreadsStore.isMuted(channel.id) || !isThread && BDFDB.LibraryStores.UserGuildSettingsStore.isGuildOrCategoryOrChannelMuted(guildId, channel.id)) return;
+							
+							if (isCurrent && BDFDB.LibraryStores.NotificationSettingsStore.getNotifyMessagesInSelectedChannel()) {
+								this.fireEvent("message3");
+								this.playAudio("message3");
+								return;
+							}
+							else if (!guildId) {
 								this.fireEvent(isGroupDM ? "groupdm" : "dm");
-								this.playAudio(isGroupDM ? "groupdm" : "dm");
+								(!isCurrent || !document.hasFocus()) && this.playAudio(isGroupDM ? "groupdm" : "dm");
 								return;
 							}
 							else if (guildId) {
 								if (BDFDB.LibraryModules.MentionUtils.isRawMessageMentioned({rawMessage: message, userId: BDFDB.UserUtils.me.id})) {
 									if (message.mentions.length && !this.isSuppressMentionsEnabled(guildId, channel.id)) for (const mention of message.mentions) if (mention.id == BDFDB.UserUtils.me.id) {
-										if (message.message_reference && !message.interaction && (!muted || choices.reply.force) && !(choices.reply.focus && focused)) {
+										if (message.message_reference && !message.interaction) {
 											this.fireEvent("reply");
-											this.playAudio("reply");
+											!isCurrent && this.playAudio("reply");
 											return;
 										}
-										if (!message.message_reference && (!muted || choices.mentioned.force) && !(choices.mentioned.focus && focused)) {
+										if (!message.message_reference) {
 											this.fireEvent("mentioned");
-											this.playAudio("mentioned");
+											!isCurrent && this.playAudio("mentioned");
 											return;
 										}
 									}
-									if (message.mention_roles.length && !BDFDB.LibraryStores.UserGuildSettingsStore.isSuppressRolesEnabled(guildId, channel.id) && (!muted || choices.role.force) && !(choices.role.focus && focused)) {
+									if (message.mention_roles.length && !BDFDB.LibraryStores.UserGuildSettingsStore.isSuppressRolesEnabled(guildId, channel.id)) {
 										const member = BDFDB.LibraryStores.GuildMemberStore.getMember(guildId, BDFDB.UserUtils.me.id);
 										if (member && member.roles.length) for (const roleId of message.mention_roles) if (member.roles.includes(roleId)) {
 											this.fireEvent("role");
-											this.playAudio("role");
+											!isCurrent && this.playAudio("role");
 											return;
 										}
 									}
 									if (message.mention_everyone && !BDFDB.LibraryStores.UserGuildSettingsStore.isSuppressEveryoneEnabled(guildId, channel.id)) {
-										if (message.content.indexOf("@everyone") > -1 && (!muted || choices.everyone.force) && !(choices.everyone.focus && focused)) {
+										if (message.content.indexOf("@everyone") > -1) {
 											this.fireEvent("everyone");
-											this.playAudio("everyone");
+											!isCurrent && this.playAudio("everyone");
 											return;
 										}
-										if (message.content.indexOf("@here") > -1 && (!muted || choices.here.force) && !(choices.here.focus && focused)) {
+										if (message.content.indexOf("@here") > -1) {
 											this.fireEvent("here");
-											this.playAudio("here");
+											!isCurrent && this.playAudio("here");
 											return;
 										}
 									}
 								}
-								if (BDFDB.LibraryStores.UserGuildSettingsStore.allowAllMessages(channel) && (!muted || choices.message1.force) && !(choices.message1.focus && focused)) {
+								if (BDFDB.LibraryStores.UserGuildSettingsStore.allowAllMessages(channel) && !(isThread && !BDFDB.LibraryStores.JoinedThreadsStore.hasJoined(channel.id))) {
 									this.fireEvent("message1");
-									this.playAudio("message1");
+									!isCurrent && this.playAudio("message1");
 									return;
 								}
 							}
@@ -314,7 +325,7 @@ module.exports = (_ => {
 								let type = e2.instance && e2.instance.name;
 								if (type && choices[type]) {
 									e2.stopOriginalMethodCall();
-									if (type == "message1") BDFDB.TimeUtils.timeout(_ => {
+									if (type == "message1" || type == "message3") BDFDB.TimeUtils.timeout(_ => {
 										let called = false;
 										for (let subType of [type].concat(Object.keys(message1Types))) if (firedEvents[subType]) {
 											delete firedEvents[subType];
@@ -450,7 +461,7 @@ module.exports = (_ => {
 						settingsItems.push(BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.CollapseContainer, {
 							title: "Sound Configuration",
 							collapseStates: collapseStates,
-							children: Object.keys(types).map(type => [
+							children: Object.keys(types).map(type => type == "message3" && !BDFDB.LibraryStores.NotificationSettingsStore.getNotifyMessagesInSelectedChannel() ? null : [
 								BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Flex, {
 									className: BDFDB.disCN.marginbottom8,
 									align: BDFDB.LibraryComponents.Flex.Align.CENTER,
@@ -459,25 +470,9 @@ module.exports = (_ => {
 										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsLabel, {
 											label: types[type].name
 										}),
-										["force", "focus", "mute", "streamMute", "invisibleMute"].some(n => types[type][n] !== null) && BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Clickable, {
+										["mute", "streamMute", "invisibleMute"].some(n => types[type][n] !== null) && BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Clickable, {
 											onClick: event => BDFDB.ContextMenuUtils.open(this, event, BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuGroup, {
 												children: [
-													{key: "force", label: "Force Play", hint: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
-														text: "Plays the Message Sound even if the Channel of the Message is muted",
-														children: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SvgIcon, {
-															name: BDFDB.LibraryComponents.SvgIcon.Names.QUESTIONMARK,
-															width: 18,
-															height: 18
-														})
-													})},
-													{key: "focus", label: "Focus Mute", hint: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
-														text: "Does not play the Message Sound when the Channel of the Message is currently opened",
-														children: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SvgIcon, {
-															name: BDFDB.LibraryComponents.SvgIcon.Names.QUESTIONMARK,
-															width: 18,
-															height: 18
-														})
-													})},
 													{key: "mute", label: ["Mute in", BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.StatusComponents.Status, {style: {marginLeft: 6}, size: 12, status: BDFDB.LibraryComponents.StatusComponents.Types.DND})]},
 													{key: "invisibleMute", label: ["Mute in", BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.StatusComponents.Status, {style: {marginLeft: 6}, size: 12, status: BDFDB.LibraryComponents.StatusComponents.Types.INVISIBLE})]},
 													{key: "streamMute", label: ["Mute while", BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.StatusComponents.Status, {style: {marginLeft: 6}, size: 12, status: BDFDB.LibraryComponents.StatusComponents.Types.STREAMING})]}
@@ -698,8 +693,7 @@ module.exports = (_ => {
 						volume: 100,
 						mute: types[type].mute,
 						streamMute: types[type].streamMute,
-						invisibleMute: types[type].invisibleMute,
-						focus: types[type].focus
+						invisibleMute: types[type].invisibleMute
 					};
 					choices[type] = choice;
 					this.saveChoice(type, false);
@@ -738,7 +732,7 @@ module.exports = (_ => {
 			}
 			
 			isSoundUsedAnywhere (type) {
-				return type && type.indexOf("poggermode_") != 0 && type != "human_man" && type != "robot_man" && type != "discodo" && type != "overlayunlock" && type != "call_ringing_beat" && !(type != "message1" && /\d$/.test(type));
+				return type && type.indexOf("poggermode_") != 0 && type != "human_man" && type != "robot_man" && type != "discodo" && type != "overlayunlock" && type != "call_ringing_beat" && !(type != "message1" && type != "message3" && /\d$/.test(type));
 			}
 		};
 	})(window.BDFDB_Global.PluginUtils.buildPlugin(changeLog));
