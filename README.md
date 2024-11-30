@@ -11,7 +11,7 @@
 </div>
 
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7F7F7&width=435&lines=~%24+Languages+%26+Tools" />
+&NewLine;<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7F7F7&width=435&lines=~%24+Languages+%26+Tools" />&NewLine;
 
 
 <div id="header" align="center">
@@ -41,7 +41,7 @@
 </div>
 
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7F7F7&width=435&lines=~%24+Stats" />
+&NewLine;<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7F7F7&width=435&lines=~%24+Stats" />&NewLine;
 
 
 <div id="header" align="center">
