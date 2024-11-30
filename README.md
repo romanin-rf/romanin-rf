@@ -10,8 +10,9 @@
   <img src="https://media.tenor.com/U4PVgG0Uh1wAAAAi/senko-fox.gif" alt="Avatar" width="200">
 </div>
 
+<br>
 
-&NewLine;<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7F7F7&width=435&lines=~%24+Languages+%26+Tools" />&NewLine;
+<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7AA22&width=435&lines=~%24+Languages+%26+Tools" />
 
 
 <div id="header" align="center">
@@ -40,8 +41,9 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg" title="Cloudflare DNS:&NewLine;-&nbsp;IPv4:&nbsp;1.1.1.1/1.0.0.1&NewLine;-&nbsp;IPv6:&nbsp;2606:4700:4700::1111/2606:4700:4700::1001" width="60" height="60"/>
 </div>
 
+<br>
 
-&NewLine;<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7F7F7&width=435&lines=~%24+Stats" />&NewLine;
+<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7AA22&width=435&lines=~%24+Stats" />
 
 
 <div id="header" align="center">
