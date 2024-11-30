@@ -45,7 +45,7 @@
 
 
 <div id="header" align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=romanin-rf&theme=github_dark" alt="" height="250" />
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=romanin-rf&theme=github_dark" alt="Top Languages By Repo" height="250" />&nbsp;
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=romanin-rf&theme=github_dark" alt="Top Languages By Commit" height="250" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=romanin-rf&theme=github_dark" alt="" height="200" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=romanin-rf&theme=github_dark" alt="Top Languages By Repo" height="200" />&nbsp;
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=romanin-rf&theme=github_dark" alt="Top Languages By Commit" height="200" />
 </div>
