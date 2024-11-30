@@ -10,8 +10,10 @@
   <img src="https://media.tenor.com/U4PVgG0Uh1wAAAAi/senko-fox.gif" alt="Avatar" width="200">
 </div>
 
----
-### Languages and Tools:
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7F7F7&width=435&lines=~%24+Languages+%26+Tools" />
+
+
 <div id="header" align="center">
   <img src="https://github.com/devicons/devicon/blob/master/icons/python/python-original.svg" title="Python" alt="Python" width="60" height="60"/>&nbsp;
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pypi/pypi-original.svg" title="PyPi" alt="PyPi" width="60" height="60"/>&nbsp;
@@ -38,10 +40,12 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg" title="Cloudflare DNS:&NewLine;-&nbsp;IPv4:&nbsp;1.1.1.1/1.0.0.1&NewLine;-&nbsp;IPv6:&nbsp;2606:4700:4700::1111/2606:4700:4700::1001" width="60" height="60"/>
 </div>
 
----
 
-### Stats:
+<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7F7F7&width=435&lines=~%24+Stats" />
+
+
 <div id="header" align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=romanin-rf&count_private=true&show_icons=true&theme=dark" height="210"/>&nbsp;
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=romanin-rf&theme=dark" height="210"/>
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=romanin-rf&theme=github_dark" alt="" height="250" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=romanin-rf&theme=github_dark" alt="Top Languages By Repo" height="250" />&nbsp;
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=romanin-rf&theme=github_dark" alt="Top Languages By Commit" height="250" />
 </div>
