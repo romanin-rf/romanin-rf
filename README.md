@@ -51,3 +51,10 @@
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=romanin-rf&theme=github_dark" alt="Top Languages By Repo" height="200" />&nbsp;
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=romanin-rf&theme=github_dark" alt="Top Languages By Commit" height="200" />
 </div>
+
+<br>
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7AA22&width=435&lines=~%24+WakaTime" />
+
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
