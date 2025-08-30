@@ -61,22 +61,6 @@
 <img src="https://readme-typing-svg.herokuapp.com?font=Comfortaa&size=32&duration=5000&pause=10000&color=F7AA22&width=435&lines=~%24+WakaTime" />
 
 <!--START_SECTION:waka-->
-📊 **This Week I Spent My Time On** 
-
-```text
-💬 Programming Languages: 
-No Activity Tracked This Week
-
-🔥 Editors: 
-No Activity Tracked This Week
-
-🐱‍💻 Projects: 
-No Activity Tracked This Week
-
-💻 Operating System: 
-No Activity Tracked This Week
-```
-
 **I Mostly Code in Python** 
 
 ```text
@@ -94,5 +78,5 @@ Ren'Py                   1 repo              ⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀�
 ![Lines of Code chart](https://raw.githubusercontent.com/romanin-rf/romanin-rf/main/assets/bar_graph.png)
 
 
- Last Updated on 29/08/2025 01:47:50 UTC
+ Last Updated on 30/08/2025 01:42:11 UTC
 <!--END_SECTION:waka-->
